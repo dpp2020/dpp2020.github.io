@@ -1,1 +1,0 @@
-function handleScriptLoadError(n){window.appInsights&&window.appInsights.trackEvent("Script Load Failure",{ScriptSrc:n.target.src,ScriptCrossorigin:n.target.getAttribute("crossorigin"),ScriptType:n.target.getAttribute("type")})}
