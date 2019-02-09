@@ -25,82 +25,6 @@
 <!-- Data Layer Prep for GTM -->
 <script src="./Still fighting. No matter what._files/sdk.js.download" async=""></script><script type="text/javascript" async="" src="./Still fighting. No matter what._files/_Incapsula_Resource"></script><script id="twitter-wjs" src="./Still fighting. No matter what._files/widgets.js.download"></script><script id="facebook-jssdk" src="./Still fighting. No matter what._files/sdk.js(1).download"></script><script async="" src="./Still fighting. No matter what._files/gtm.js(1).download"></script><script async="" src="./Still fighting. No matter what._files/gtm.js(2).download"></script><script>
 
-console.log("no DL stringify");
-
-window.dataLayer = window.dataLayer || [];
-
-// This function grabs data from the form before submission and renders it to the dataLayer.
-
-(function() {
-
-    var postRender = function(args) {
-        var dl_push = {
-            event: 'form-rendered-data'
-        };
-        dl_push.details = args;
-        dataLayer.push(dl_push);
-        return args;
-    }
-    window.nvtag_callbacks = window.nvtag_callbacks || {};
-    window.nvtag_callbacks.postRender = window.nvtag_callbacks.postRender || [];
-    window.nvtag_callbacks.postRender.push(postRender);
-}
-)();
-
-//This function grabs data from the submitted form and echoes it into the dataLayer
-
-(function() {
-    var submitSegue = function(args) {
-        var dl_push = {
-            event: 'form-submitted-data'
-        };
-        dl_push.details = args;
-        if (dl_push.details.postVals && dl_push.details.postVals.CustomFormFieldQuestion_6308388360774211_MappedCustomFormFieldQuestion_39) {
-            //            dl_push.details.postVals.affiliateId = dl_push.details.postVals.CustomFormFieldQuestion_6308388360774211_MappedCustomFormFieldQuestion_39;
-            try {
-                dl_push.details.postVals.affiliateName = $.trim($('[name="CustomFormFieldQuestion_6308388360774211_MappedCustomFormFieldQuestion_39"] option[value="' + dl_push.details.postVals.CustomFormFieldQuestion_6308388360774211_MappedCustomFormFieldQuestion_39 + '"]:first').text())
-            } catch (e) {}
-
-        }
-        dataLayer.push(dl_push);
-        return args;
-    }
-    window.nvtag_callbacks = window.nvtag_callbacks || {};
-    window.nvtag_callbacks.preSegue = window.nvtag_callbacks.preSegue || [];
-    window.nvtag_callbacks.preSegue.push(submitSegue);
-}
-)();
-
-
-
-// This dataLayer push merges existing variables on the page (called "Form Merge Fields") and populates the dataLayer upon page render.
-// The dataLayer event key is used to tell GTM when it can fire tags.
-
-	window.dataLayer.push({
-		"event":"dataLayer_initialized",
-		"everyAction":{
-				accountNumber: "",
-				accountType:"",
-				additionalContributionAmount:0,
-				committeeFullName:"Planned Parenthood Action Fund",
-				contributionAmount:"",
-				contributionDateTime:"",
-				contributionType:"",
-				country:"",
-				dateOfBirth:"",
-				designation:"Action Fund C4",
-				// There is also a "Brand" value coming directly from EA's native GA integration -- we think this is Committee Name (according to EA)
-				ethnicity:"",
-				eventDescription:"",
-				eventName:"",
-				fundraiserContributionCount:"",
-				gender:"",
-				formTitle:"Still fighting. No matter what.",
-				formUrl:"http://100abortionphotos.com/images/3.jpg",
-				zipCode:""
-
-		}
-	});
 </script>
 
 
@@ -1679,97 +1603,11 @@ nvtag_callbacks.postRender.push(myPostRender);
 </script>
 <!--carry strings incl multistep advocacy protection-->
 <script>
-    var submitPreSegue = function(args) {
-        console.log('submit pre segue called!');
-        console.log(args);
 
-        if (args.formdef.confirmation) {
-            if (args.formdef.confirmation.action == 'ExternalPage') {
-                var currentQs = window.location.search;
-                newRedirect = args.formdef.confirmation.redirect_url + currentQs;
-                // console.log(newRedirect);
-                args.formdef.confirmation.redirect_url = newRedirect;
-                // debugger;
-            }
-        }
-
-        return args;
-    }
-
-    var submitSegue = function(args) {
-        console.log('submit segue called!');
-        console.log(args);
-
-        return args;
-    }
-    var nvtag_callbacks = nvtag_callbacks || {};
-    nvtag_callbacks.preSegue = nvtag_callbacks.preSegue || [];
-    nvtag_callbacks.preSegue.push(submitPreSegue);
-
-    var nvtag_callbacks = nvtag_callbacks || {};
-    nvtag_callbacks.segue = nvtag_callbacks.segue || [];
-    nvtag_callbacks.segue.push(submitSegue);
 </script>
 
 
 <script>
-
-var myPostRender = function(args) {
-  (function ($) {
-
-// hide unnecessary checkbox for forms that require email opt-in
-
-if (($('.YesSignMeUpForUpdatesForBinder input[name=YesSignMeUpForUpdatesForBinder]:required').length) && ($('.YesSignMeUpForUpdatesForBinder input[name=YesSignMeUpForUpdatesForBinder]:checked').length)){
-
-$(".YesSignMeUpForUpdatesForBinder input[name=YesSignMeUpForUpdatesForBinder]").parent('label').addClass('YesSignMeUpForUpdatesForBinder-hidden');
-$(".YesSignMeUpForUpdatesForBinder label span").addClass('at-legal');
-
-}
-
-if (($('.SmsSubscribeMobilePhone input[name=SmsSubscribeMobilePhone]:required').length) && ($('.SmsSubscribeMobilePhone input[name=SmsSubscribeMobilePhone]:checked').length)){
-
-$(".SmsSubscribeMobilePhone").addClass('SmsSubscribeMobilePhone-hidden');
-$(".SmsLegalDisclaimer").removeClass('at-indented');
-
-}
-
-// add social share copy to thank you pages
-if (($('.content.thankYou').length) && ($('#TYSocialShare_container').length)){
-
-  var $shareDiv = $('#TYSocialShare_container').clone();
-  $('.content.thankYou .contributions').append($shareDiv);
-  $('#TYSocialShare_original').remove();
-
-}
-
-
-  }(jQuery));
-  //
-  return args;
-};
-
-
-jQuery(document).ready(function ($) {
-
-if ($('.oa-elected-officials-container').length) {
-
-  $( ".site-main" ).wrapInner( "<div class='ngp-form at electedOfficials'></div>");
-
-}
-
-
-
-
-
-
-    });
-
-
-
-
-var nvtag_callbacks = nvtag_callbacks || {};
-nvtag_callbacks.postRender = nvtag_callbacks.postRender || [];
-nvtag_callbacks.postRender.push(myPostRender);
 
 </script>
 <script>
@@ -1871,86 +1709,18 @@ nvtag_callbacks.postRender.push(myPostRender);
 </script>
 <script>
 
-var myAlterFormDefinition = function(vals) {
-    (function ($) {
 
-        //On multistep donation forms, we don't want interests and custom questions on their own step
-        if (vals.form_definition.metadata.layoutStyle == "multistep"){
-
-            // Retreive back-end form settings using ActionTag Callbacks: https://developers.everyaction.com/action-tag#examples
-            var name_index = 0;
-            var child_index = 0;
-
-            _.each(vals.form_definition.form_elements, function(child) {
-                name_index++;
-                if (child.name === 'Interests') {
-                    vals.form_definition.form_elements[(name_index - 1)].step = 2;
-                    //All feilds in "Interests" are moved to the Payment Information step
-                }
-            });
-
-
-        }
-        return vals;
-
-}(jQuery));
-
-};
-var nvtag_callbacks = nvtag_callbacks || {};
-nvtag_callbacks.alterFormDefinition = nvtag_callbacks.alterFormDefinition || [];
-nvtag_callbacks.alterFormDefinition.push(myAlterFormDefinition);
 </script>
 
 <script>
-var myPostRender = function(vals) {
-  (function ($) {
-
-// Original JavaScript getCookie code by Chirp Internet: www.chirp.com.au
-
-    var mappedGA = ('input[name*="MappedCustomFormFieldQuestion_44"]');
-
-    // Does this form have a GA Client ID Field?
-    if ($(mappedGA ).length){
-
-        function getCookie(name) {
-            var re = new RegExp(name + "=([^;]+)");
-            var value = re.exec(document.cookie);
-            return (value != null) ? unescape(value[1]) : null;
-        }
-        var gaClientId = getCookie("_ga");
-        // Populate hidden field with GA cookie value
-        $('input[name*="MappedCustomFormFieldQuestion_44"]').val(gaClientId);
-
-    }
-  }(jQuery));
-};
 
 
-var nvtag_callbacks = nvtag_callbacks || {};
-nvtag_callbacks.postRender = nvtag_callbacks.postRender || [];
-nvtag_callbacks.postRender.push(myPostRender);
+
+
 </script>
 
 <script>
-  // change variable below to be your default marketsource code. Eventually, could make a theme based input field to populate that as a merge field
-    var defaultMs = '4NALz1900W1N1N';
-    var addMs = function (args) {
-    var postData = new Object();
-    postData = args.data;
-    // actiontag loads lodash by default, hence why we can use that in the line below
-    if (_.has(postData, "MarketSource")){ // if a marketsource is already populated in the form post (from the url, presumably), just return the post data
-              //Directed forms should always just use default value, we don't want anything other than 1N1D
-      return args;
-    }
-    else { // lacking a marketsource code, add it to the post data object from the variable declared above
-        args.data.MarketSource = defaultMs;
-        return args;
-    }
-}
 
-var nvtag_callbacks = nvtag_callbacks || {};
-nvtag_callbacks.alterPost = nvtag_callbacks.alterPost || [];
-nvtag_callbacks.alterPost.push(addMs);
 </script>
 <script>
     // We will need these variables for postRender and postFill
@@ -1989,32 +1759,7 @@ nvtag_callbacks.postRender.push(myPostRender);
 </script>
 
 <script>
-//we only want to show the Privacy Policy Info on the last step of multistep forms
-var myPostRender = function(vals) {
-    (function ($) {
 
-    if ( $('.ngp-form').hasClass('multistep-layout') ){
-
-        var observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutationRecord) {
-
-                    if ( $('.submitStep').is(':visible')) {
-                        $('#PrivacyPolicy').show();
-                    }else{
-                        $('#PrivacyPolicy').hide();
-                    }
-            });
-        });
-        var target = document.querySelector(".submitStep");
-        observer.observe(target, { attributes : true, attributeFilter : ['style'] });
-    }
-
-}(jQuery));
-};
-
-var nvtag_callbacks = nvtag_callbacks || {};
-nvtag_callbacks.postRender = nvtag_callbacks.postRender || [];
-nvtag_callbacks.postRender.push(myPostRender);
 </script>
 
 <script>
